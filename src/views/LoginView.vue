@@ -28,7 +28,9 @@
           登录
         </el-button>
         <!-- resetForm(ruleFormRef) -->
-        <el-button class="loginBtn">重置</el-button>
+        <el-button class="loginBtn" @click="resetForm(ruleFormRef)"
+          >重置</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -92,7 +94,11 @@ export default defineComponent({
         }
       });
     };
-    return { ...toRefs(data), rules, ruleFormRef, submitForm };
+    const resetForm = (formEl: FormInstance | undefined) => {
+      if (!formEl) return;
+      formEl.resetFields();
+    };
+    return { ...toRefs(data), rules, ruleFormRef, submitForm, resetForm };
   },
 });
 </script>
