@@ -1,0 +1,22 @@
+baseURL：https://www.fastmock.site/mock/bf1fcb3c2e2945669c2c8d0ecb8009b8/api
+
+登录接口
+地址：/login
+方式：post
+参数：username && password
+
+商品列表接口
+地址：/getGoodsList
+方式：get
+
+用户列表接口
+地址：/getUserList
+方式：get
+
+角色列表接口
+地址：/getRoleList
+方式：get
+
+权限列表接口
+地址：/getAuthorityList
+方式：get
