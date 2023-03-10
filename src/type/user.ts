@@ -21,6 +21,13 @@ interface RoleListInt {
     roleName: string;
 }
 
+interface ActiveInt {
+    id: number;
+    nickName: string;
+    role: number[];
+    userName: string;
+}
+
 export class InitData {
     selectData: SelectDataInt = {
         nickName: "",
@@ -28,4 +35,12 @@ export class InitData {
     };
     list: ListInt[] = []; // 接收用户信息的列表
     roleList: RoleListInt[] = []; // 接收角色信息列表
+    isShow = false;
+    active: ActiveInt = {
+        // 当前选中的对象
+        id: 0,
+        nickName: "",
+        role: [],
+        userName: "",
+    };
 }

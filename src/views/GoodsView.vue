@@ -96,7 +96,7 @@ export default defineComponent({
     watch(
       [() => data.selectData.title, () => data.selectData.introduce],
       () => {
-        if (data.selectData.title == "" && data.selectData.introduce == "") {
+        if (data.selectData.title == "" || data.selectData.introduce == "") {
           getGoods();
         }
       }

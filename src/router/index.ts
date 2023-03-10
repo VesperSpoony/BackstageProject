@@ -6,6 +6,7 @@ const routes: Array<RouteRecordRaw> = [
         path: "/",
         name: "home",
         component: HomeView,
+        redirect: "goods", // 设置重定向
         children: [
             {
                 path: "/goods",
@@ -24,6 +25,24 @@ const routes: Array<RouteRecordRaw> = [
                     title: "用户列表",
                 },
                 component: () => import("@/views/UserView.vue"),
+            },
+            {
+                path: "/role",
+                name: "role",
+                meta: {
+                    isShow: true,
+                    title: "角色列表",
+                },
+                component: () => import("@/views/RoleView.vue"),
+            },
+            {
+                path: "/authority",
+                name: "authority",
+                meta: {
+                    isShow: false,
+                    title: "权限列表",
+                },
+                component: () => import("@/views/AuthorityView.vue"),
             },
         ],
     },
@@ -50,6 +69,15 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
+});
+
+router.beforeEach((to, feom, next) => {
+    const token: string | null = localStorage.getItem("token");
+    if (!token && to.path != "/login") {
+        next("/login");
+    } else {
+        next();
+    }
 });
 
 export default router;

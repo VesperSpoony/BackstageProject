@@ -9,7 +9,11 @@
           <el-col :span="16">
             <h2>后台管理系统</h2>
           </el-col>
-          <el-col :span="4"><span class="logout">退出登录</span></el-col>
+          <el-col class="col-btn" :span="4">
+            <el-button type="primary" size="default" @click="delToken">
+              退出登录
+            </el-button>
+          </el-col>
         </el-row>
       </el-header>
       <el-container>
@@ -20,7 +24,7 @@
             active-text-color="#ffd04b"
             background-color="#545c64"
             class="el-menu-vertical-demo"
-            default-active="2"
+            :default-active="active"
             text-color="#fff"
             router
           >
@@ -46,16 +50,21 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 export default defineComponent({
   name: "HomeView",
   setup() {
     const router = useRouter();
+    const route = useRoute();
     // console.log(router.getRoutes());
     const list = router.getRoutes().filter((item) => item.meta.isShow);
     // console.log(list);
-    return { list };
+    const delToken = () => {
+      localStorage.removeItem("token");
+      router.push("/login");
+    };
+    return { list, active: route.path, delToken };
   },
   components: {},
 });
@@ -74,6 +83,10 @@ export default defineComponent({
     height: 80px;
     line-height: 80px;
     color: #fff;
+  }
+  .col-btn {
+    height: 80px;
+    line-height: 80px;
   }
 }
 .el-aside {
